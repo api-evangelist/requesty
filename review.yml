@@ -1,0 +1,75 @@
+aid: requesty
+name: Requesty
+review:
+  question: Does Requesty expose a documented public WebSocket API?
+  answer: false
+  date: '2026-06-20'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: true
+  asyncapiScopeNote: |
+    Per current API Evangelist scope, HTTP Server-Sent Events (SSE) is
+    in-scope for AsyncAPI modeling. An AsyncAPI 2.6 document was created at
+    asyncapi/requesty-asyncapi.yml describing the chat completion SSE stream
+    (POST /chat/completions with stream=true). No WebSocket surface was
+    modeled because none is documented.
+findings:
+  summary: |
+    Requesty does not publish a documented public WebSocket API. The Requesty
+    Router is an OpenAI-compatible LLM gateway exposing only REST (HTTPS)
+    endpoints under https://router.requesty.ai/v1 (and an EU residency router
+    at https://router.eu.requesty.ai/v1). Streaming for chat completions is
+    delivered as HTTP Server-Sent Events (SSE) via the `stream: true`
+    parameter on the REST endpoint; SSE is a one-way HTTP streaming transport
+    and is not WebSocket. No realtime, bidirectional, or audio streaming
+    WebSocket (ws:// or wss://) endpoint is documented.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://router.requesty.ai/v1
+      documented: true
+    - protocol: SSE
+      scheme: https
+      note: Server-Sent Events delivered over the same REST chat completions endpoint when stream=true. Not WebSocket.
+      documented: true
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented in Requesty's API reference or product pages as of the review date.
+  endpointsConfirmedRest:
+    - POST https://router.requesty.ai/v1/chat/completions
+    - POST https://router.requesty.ai/v1/messages
+    - POST https://router.requesty.ai/v1/responses
+    - POST https://router.requesty.ai/v1/embeddings
+    - POST https://router.requesty.ai/v1/audio/speech
+    - POST https://router.requesty.ai/v1/audio/transcriptions
+    - POST https://router.requesty.ai/v1/images/generations
+    - POST https://router.requesty.ai/v1/images/edits
+    - GET  https://router.requesty.ai/v1/models
+    - GET  https://router.requesty.ai/v1/api-keys
+    - POST https://router.requesty.ai/v1/api-keys
+    - GET  https://router.requesty.ai/v1/api-keys/{key_id}
+    - GET  https://router.requesty.ai/v1/api-keys/{key_id}/usage
+    - PATCH https://router.requesty.ai/v1/api-keys/{key_id}/limit
+    - DELETE https://router.requesty.ai/v1/api-keys/{key_id}
+    - GET  https://router.requesty.ai/v1/groups
+    - GET  https://router.requesty.ai/v1/organization
+    - GET  https://router.requesty.ai/v1/organization/usage
+sources:
+  - url: https://docs.requesty.ai
+    type: Documentation
+    note: Overview lists OpenAI-compatible REST base URL https://router.requesty.ai/v1; no WebSocket mentioned.
+  - url: https://docs.requesty.ai/api-reference/endpoint/chat-completions-create
+    type: APIReference
+    note: Chat completions is HTTPS REST; streaming via stream=true delivers Server-Sent Events.
+  - url: https://docs.requesty.ai/llms.txt
+    type: Documentation
+    note: Enumerates inference and management REST endpoints; all are HTTPS REST.
+actions:
+  asyncapiPath: asyncapi/requesty-asyncapi.yml
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket protocol surface exists. Under current scope that allows SSE
+    in AsyncAPI, an AsyncAPI 2.6 document was authored for the chat completion
+    SSE stream, with HTTP+SSE transport documented explicitly throughout the
+    spec (server protocol, channel bindings, info.x-transport-notes) so SSE is
+    never misrepresented as WebSocket.

@@ -1,0 +1,181 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Requesty Router API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Chat",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a chat completion",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://router.requesty.ai/v1/chat/completions",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"model\": \"openai/gpt-4o-mini\",\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"Hello!\"\n    }\n  ],\n  \"max_tokens\": 256,\n  \"temperature\": 1,\n  \"stream\": false\n}"
+            }
+          },
+          "docs": "Routes an OpenAI-compatible chat completion across 300+ models. Set stream=true for Server-Sent Events streaming."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Embeddings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create embeddings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://router.requesty.ai/v1/embeddings",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"model\": \"openai/text-embedding-3-small\",\n  \"input\": \"The quick brown fox.\"\n}"
+            }
+          },
+          "docs": "Generates vector embeddings for the supplied input using a routed embedding model."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Models",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List models",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://router.requesty.ai/v1/models"
+          },
+          "docs": "Lists the 300+ models routable through Requesty with metadata and pricing."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "API Keys",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List API keys",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://router.requesty.ai/v1/api-keys"
+          },
+          "docs": "Lists all API keys for the authenticated account."
+        },
+        {
+          "info": {
+            "name": "Create an API key",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://router.requesty.ai/v1/api-keys",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"name\": \"my-key\",\n  \"limit\": 100,\n  \"labels\": [\"prod\"]\n}"
+            }
+          },
+          "docs": "Creates a new API key with optional spending limit, labels, and expiry."
+        },
+        {
+          "info": {
+            "name": "Get an API key",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://router.requesty.ai/v1/api-keys/:key_id"
+          },
+          "docs": "Gets details for a specific API key."
+        },
+        {
+          "info": {
+            "name": "Update API key spending limit",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://router.requesty.ai/v1/api-keys/:key_id/limit",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"limit\": 250\n}"
+            }
+          },
+          "docs": "Updates the USD spending limit for a specific API key."
+        },
+        {
+          "info": {
+            "name": "Delete an API key",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://router.requesty.ai/v1/api-keys/:key_id"
+          },
+          "docs": "Deletes a specific API key."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Usage",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get API key usage",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://router.requesty.ai/v1/api-keys/:key_id/usage"
+          },
+          "docs": "Retrieves usage statistics and spend for a specific API key."
+        },
+        {
+          "info": {
+            "name": "Get organization usage",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://router.requesty.ai/v1/organization/usage"
+          },
+          "docs": "Retrieves aggregated usage statistics and spend across the organization."
+        }
+      ]
+    }
+  ]
+}

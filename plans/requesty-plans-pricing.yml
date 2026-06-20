@@ -1,0 +1,128 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Requesty
+providerId: requesty
+created: '2026-06-20'
+modified: '2026-06-20'
+reconciled: true
+tags:
+- AI
+- LLM
+- Routing
+- Gateway
+- Observability
+- Plans
+description: >-
+  Requesty uses a usage-based pricing model layered on top of unified LLM
+  routing. A Free tier provides 200 requests per day on free models with no
+  credit card required. Pay-as-you-go applies a 5% markup on the underlying
+  base model cost (a model that costs $10 per 1M tokens upstream costs $10.50
+  through Requesty), with no subscription, seat fees, or minimum spend, and
+  supports bring-your-own-keys (BYOK) across 300+ models. Enterprise adds SSO,
+  RBAC with audit logs, guardrails, PII detection, dedicated support, and
+  custom SLAs on negotiated pricing.
+notes: >-
+  The 5% markup, Free-tier request cap, and per-model base rates are as
+  published on the Requesty pricing and models pages; verify the current model
+  catalog and rates against the live pages during reconciliation.
+sources:
+- https://www.requesty.ai/pricing
+- https://www.requesty.ai/models
+- https://docs.requesty.ai
+plans:
+- id: requesty-free
+  name: Free
+  type: free
+  description: >-
+    Free access to routing, caching, fallbacks, and EU data residency with a
+    daily request cap on free models. No credit card required.
+  entries:
+  - label: Free Model Requests
+    name: free_requests
+    type: usage
+    metric: requests
+    limit: 200
+    timeFrame: day
+    geo: global
+    unit: 1
+    price: $0
+    userMultiplied: false
+  elements:
+  - name: Chat Completions (free models)
+  - name: Routing
+  - name: Caching
+  - name: Fallbacks
+  - name: EU Data Residency
+- id: requesty-pay-as-you-go
+  name: Pay-as-you-go
+  type: usage
+  description: >-
+    Usage-based access to 300+ models with a 5% markup on base model cost,
+    BYOK support, observability, spend limits, and budget caps. No
+    subscription, seat fees, or minimum spend.
+  entries:
+  - label: Routing Markup
+    name: routing_markup
+    type: usage
+    metric: spend
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: 5% markup on base model cost
+    userMultiplied: false
+  - label: Routed Model Tokens
+    name: routed_tokens
+    type: usage
+    metric: tokens
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1000000
+    price: base model rate + 5% (see Requesty models page)
+    userMultiplied: false
+  - label: Bring Your Own Keys (BYOK)
+    name: byok
+    type: usage
+    metric: spend
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: routing fee on BYOK traffic (see pricing page)
+    userMultiplied: false
+  elements:
+  - name: Chat Completions
+  - name: Embeddings
+  - name: Routing & Fallbacks
+  - name: Caching
+  - name: Observability
+  - name: Spend Limits & Budget Caps
+- id: requesty-enterprise
+  name: Enterprise
+  type: enterprise
+  description: >-
+    Custom pricing with SSO, full RBAC with audit logs, guardrails, PII
+    detection, service accounts for CI/CD, dedicated support, and custom SLAs.
+    Contact sales@requesty.ai.
+  entries:
+  - label: Enterprise Agreement
+    name: enterprise
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: SSO
+  - name: RBAC & Audit Logs
+  - name: Guardrails & PII Detection
+  - name: Service Accounts
+  - name: Dedicated Support & SLAs
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

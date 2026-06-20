@@ -1,0 +1,70 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Requesty
+providerId: requesty
+created: '2026-06-20'
+modified: '2026-06-20'
+reconciled: false
+tags:
+- AI
+- LLM
+- Routing
+- Gateway
+- Observability
+- Rate Limiting
+- Quotas
+- Throttling
+description: >-
+  Requesty enforces account- and key-level controls on gateway traffic. The
+  Free tier is capped at 200 requests per day on free models. Pay-as-you-go
+  traffic is governed primarily by per-key spending limits and budget caps
+  rather than fixed request quotas, and effective throughput also depends on
+  the underlying provider's rate limits for the routed model (or the user's
+  own provider limits when using BYOK). Specific per-account numeric throttles
+  are not reconciled in this artifact.
+notes: >-
+  Confirm Free-tier daily caps, per-key spend limits, and any RPM/TPM ceilings
+  on reconciliation; routed throughput is also bounded by the upstream
+  provider and BYOK key limits.
+sources:
+- https://www.requesty.ai/pricing
+- https://docs.requesty.ai
+responseCodes:
+  throttled: 429
+limits:
+- name: Free Tier Requests Per Day
+  scope: account
+  metric: requests
+  limit: 200
+  notes: Applies to free models on the Free tier; no credit card required.
+- name: Per-Key Spending Limit
+  scope: api_key
+  metric: spend
+  limit: see provider configuration
+  notes: Pay-as-you-go keys are governed by configurable USD spend limits and budget caps.
+- name: Upstream Provider Limits
+  scope: model
+  metric: requests
+  limit: see upstream provider
+  notes: Effective RPM/TPM depend on the routed provider's limits, or the user's own limits under BYOK.
+- name: Requests Per Minute (RPM)
+  scope: account
+  metric: requests
+  limit: see provider documentation
+  notes: Account-level throughput ceilings vary; not reconciled.
+- name: Tokens Per Minute (TPM)
+  scope: account
+  metric: tokens
+  limit: see provider documentation
+  notes: Account-level token throughput ceilings vary; not reconciled.
+policies:
+- name: Spend-Based Controls
+  description: Access is bounded by per-key spending limits and budget caps rather than fixed quotas on paid usage.
+- name: Fallback Routing
+  description: On provider failure or throttling, Requesty can automatically fail over to alternate providers/models.
+- name: Backoff Strategy
+  description: Clients should implement exponential backoff with jitter and honor Retry-After on 429 responses.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

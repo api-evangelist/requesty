@@ -1,0 +1,466 @@
+openapi: 3.0.1
+info:
+  title: Requesty Router API
+  description: >-
+    OpenAI-compatible LLM gateway that routes a single API across 300+ models
+    from providers such as OpenAI, Anthropic, DeepSeek, and Together AI, adding
+    intelligent routing, automatic fallbacks, response caching, spend controls,
+    and per-request cost observability. This specification covers the documented
+    inference (chat completions, embeddings, models) and management (API keys,
+    usage/analytics) endpoints of the Requesty Router.
+  termsOfService: https://www.requesty.ai/terms
+  contact:
+    name: Requesty Support
+    email: support@requesty.ai
+  version: '1.0'
+servers:
+  - url: https://router.requesty.ai/v1
+    description: Global router
+  - url: https://router.eu.requesty.ai/v1
+    description: EU data residency router
+security:
+  - bearerAuth: []
+tags:
+  - name: Chat
+    description: OpenAI-compatible chat completions routed across providers.
+  - name: Embeddings
+    description: Vector embedding generation.
+  - name: Models
+    description: Catalog of routable models.
+  - name: API Keys
+    description: Programmatic management of Requesty API keys.
+  - name: Usage
+    description: Usage statistics and spend reporting.
+paths:
+  /chat/completions:
+    post:
+      operationId: createChatCompletion
+      tags:
+        - Chat
+      summary: Create a chat completion
+      description: >-
+        Creates a model response for the given chat conversation. Requesty
+        routes the request to the best available provider for the requested
+        model, applying fallbacks and caching. OpenAI-compatible. Set
+        `stream: true` to receive the response as Server-Sent Events.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateChatCompletionRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateChatCompletionResponse'
+            text/event-stream:
+              schema:
+                type: string
+                description: Server-Sent Events stream of chat completion chunks when stream=true.
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '429':
+          description: Too many requests
+  /embeddings:
+    post:
+      operationId: createEmbedding
+      tags:
+        - Embeddings
+      summary: Create embeddings
+      description: Generates vector embeddings for the supplied input text using a routed embedding model.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateEmbeddingRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateEmbeddingResponse'
+  /models:
+    get:
+      operationId: listModels
+      tags:
+        - Models
+      summary: List models
+      description: Lists the models available through the Requesty Router with metadata and pricing.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListModelsResponse'
+  /api-keys:
+    get:
+      operationId: listApiKeys
+      tags:
+        - API Keys
+      summary: List API keys
+      description: Lists all API keys for the authenticated account.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListApiKeysResponse'
+    post:
+      operationId: createApiKey
+      tags:
+        - API Keys
+      summary: Create an API key
+      description: Creates a new API key with optional spending limit, labels, and expiry.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateApiKeyRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiKey'
+  /api-keys/{key_id}:
+    get:
+      operationId: getApiKey
+      tags:
+        - API Keys
+      summary: Get an API key
+      parameters:
+        - $ref: '#/components/parameters/KeyId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiKey'
+    delete:
+      operationId: deleteApiKey
+      tags:
+        - API Keys
+      summary: Delete an API key
+      parameters:
+        - $ref: '#/components/parameters/KeyId'
+      responses:
+        '200':
+          description: OK
+  /api-keys/{key_id}/usage:
+    get:
+      operationId: getApiKeyUsage
+      tags:
+        - Usage
+      summary: Get API key usage
+      description: Retrieves usage statistics and spend for a specific API key.
+      parameters:
+        - $ref: '#/components/parameters/KeyId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsageReport'
+  /api-keys/{key_id}/limit:
+    patch:
+      operationId: updateApiKeyLimit
+      tags:
+        - API Keys
+      summary: Update API key spending limit
+      parameters:
+        - $ref: '#/components/parameters/KeyId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                limit:
+                  type: number
+                  description: Spending limit in USD.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiKey'
+  /organization/usage:
+    get:
+      operationId: getOrganizationUsage
+      tags:
+        - Usage
+      summary: Get organization usage
+      description: Retrieves aggregated usage statistics and spend across the organization.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsageReport'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Requesty API key passed as a Bearer token in the Authorization header.
+  parameters:
+    KeyId:
+      name: key_id
+      in: path
+      required: true
+      description: Identifier of the API key.
+      schema:
+        type: string
+  schemas:
+    CreateChatCompletionRequest:
+      type: object
+      required:
+        - messages
+      properties:
+        model:
+          type: string
+          description: Routed model identifier, e.g. `openai/gpt-4o-mini` or `anthropic/claude-sonnet-4-20250514`. Defaults to `openai/gpt-4o-mini`.
+          default: openai/gpt-4o-mini
+        messages:
+          type: array
+          description: A list of messages comprising the conversation so far.
+          items:
+            $ref: '#/components/schemas/ChatMessage'
+        max_tokens:
+          type: integer
+          description: Maximum number of tokens to generate.
+        temperature:
+          type: number
+          description: Sampling temperature between 0 and 2.
+          default: 1
+        top_p:
+          type: number
+          description: Nucleus sampling probability mass.
+        stream:
+          type: boolean
+          description: If true, partial deltas are streamed as Server-Sent Events.
+          default: false
+        tools:
+          type: array
+          description: A list of tools the model may call, such as custom functions or built-in web_search.
+          items:
+            type: object
+        tool_choice:
+          description: Controls which (if any) tool is called by the model.
+          oneOf:
+            - type: string
+            - type: object
+        response_format:
+          type: object
+          description: An object specifying the format the model must output (e.g. JSON / structured outputs), where supported by the routed model.
+    ChatMessage:
+      type: object
+      required:
+        - role
+        - content
+      properties:
+        role:
+          type: string
+          enum:
+            - system
+            - user
+            - assistant
+            - tool
+        content:
+          description: The contents of the message; string or array of content parts.
+          oneOf:
+            - type: string
+            - type: array
+              items:
+                type: object
+    CreateChatCompletionResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        object:
+          type: string
+          example: chat.completion
+        created:
+          type: integer
+        model:
+          type: string
+        choices:
+          type: array
+          items:
+            type: object
+            properties:
+              index:
+                type: integer
+              message:
+                $ref: '#/components/schemas/ChatMessage'
+              finish_reason:
+                type: string
+        usage:
+          $ref: '#/components/schemas/Usage'
+    Usage:
+      type: object
+      properties:
+        prompt_tokens:
+          type: integer
+        completion_tokens:
+          type: integer
+        total_tokens:
+          type: integer
+        cost:
+          type: number
+          description: Requesty USD cost for the request.
+    CreateEmbeddingRequest:
+      type: object
+      required:
+        - model
+        - input
+      properties:
+        model:
+          type: string
+        input:
+          description: Input text or array of text to embed.
+          oneOf:
+            - type: string
+            - type: array
+              items:
+                type: string
+    CreateEmbeddingResponse:
+      type: object
+      properties:
+        object:
+          type: string
+          example: list
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              object:
+                type: string
+                example: embedding
+              index:
+                type: integer
+              embedding:
+                type: array
+                items:
+                  type: number
+        model:
+          type: string
+        usage:
+          $ref: '#/components/schemas/Usage'
+    ListModelsResponse:
+      type: object
+      properties:
+        object:
+          type: string
+          example: list
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Model'
+    Model:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Routed model identifier, e.g. `openai/gpt-4o`.
+        object:
+          type: string
+          example: model
+        owned_by:
+          type: string
+          description: Upstream provider.
+        context_window:
+          type: integer
+          description: Maximum context length supported.
+        input_price:
+          type: number
+          description: Input price per million tokens in USD.
+        output_price:
+          type: number
+          description: Output price per million tokens in USD.
+    ListApiKeysResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiKey'
+    CreateApiKeyRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        limit:
+          type: number
+          description: Optional spending limit in USD.
+        labels:
+          type: array
+          items:
+            type: string
+        expiry:
+          type: string
+          format: date-time
+    ApiKey:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        key:
+          type: string
+          description: The API key value, returned only on creation.
+        limit:
+          type: number
+        labels:
+          type: array
+          items:
+            type: string
+        expiry:
+          type: string
+          format: date-time
+        created_at:
+          type: string
+          format: date-time
+    UsageReport:
+      type: object
+      properties:
+        total_cost:
+          type: number
+          description: Total spend in USD over the reporting window.
+        total_requests:
+          type: integer
+        total_tokens:
+          type: integer
+        breakdown:
+          type: array
+          description: Per-model or per-key usage breakdown.
+          items:
+            type: object
+            properties:
+              model:
+                type: string
+              requests:
+                type: integer
+              tokens:
+                type: integer
+              cost:
+                type: number
