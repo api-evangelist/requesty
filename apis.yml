@@ -99,6 +99,14 @@ apis:
   description: Programmatically create, list, inspect, and delete API keys and manage
     their spending limits, labels, and expiration for governing gateway access.
 common:
+- type: TrustCenter
+  url: security/requesty-trust-center.yml
+- type: VulnerabilityDisclosure
+  url: security/requesty-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/requesty-domain-security.yml
+- type: Authentication
+  url: authentication/requesty-authentication.yml
 - type: GitHubOrganization
   url: https://github.com/requestyai
 - type: LinkedIn
@@ -113,6 +121,8 @@ common:
   url: rate-limits/requesty-rate-limits.yml
 - type: FinOps
   url: finops/requesty-finops.yml
+- type: Blog
+  url: https://www.requesty.ai/blog
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
