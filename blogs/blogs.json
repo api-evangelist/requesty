@@ -1,0 +1,13 @@
+{
+  "repo": "requesty",
+  "feeds": [
+    {
+      "source": "https://www.requesty.ai/blog",
+      "feed_url": "https://www.requesty.ai/blog",
+      "title": "Requesty Blog",
+      "saved": 0
+    }
+  ],
+  "fetched": "2026-07-11T11:43:46Z",
+  "post_count": 25
+}
