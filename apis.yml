@@ -99,6 +99,8 @@ apis:
   description: Programmatically create, list, inspect, and delete API keys and manage
     their spending limits, labels, and expiration for governing gateway access.
 common:
+- type: AgenticAccess
+  url: agentic-access/requesty-agentic-access.yml
 - type: TrustCenter
   url: security/requesty-trust-center.yml
 - type: VulnerabilityDisclosure
