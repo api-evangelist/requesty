@@ -1,0 +1,89 @@
+openapi: 3.0.1
+info:
+  title: Requesty Router API Keys Usage API
+  description: OpenAI-compatible LLM gateway that routes a single API across 300+ models from providers such as OpenAI, Anthropic, DeepSeek, and Together AI, adding intelligent routing, automatic fallbacks, response caching, spend controls, and per-request cost observability. This specification covers the documented inference (chat completions, embeddings, models) and management (API keys, usage/analytics) endpoints of the Requesty Router.
+  termsOfService: https://www.requesty.ai/terms
+  contact:
+    name: Requesty Support
+    email: support@requesty.ai
+  version: '1.0'
+servers:
+- url: https://router.requesty.ai/v1
+  description: Global router
+- url: https://router.eu.requesty.ai/v1
+  description: EU data residency router
+security:
+- bearerAuth: []
+tags:
+- name: Usage
+  description: Usage statistics and spend reporting.
+paths:
+  /api-keys/{key_id}/usage:
+    get:
+      operationId: getApiKeyUsage
+      tags:
+      - Usage
+      summary: Get API key usage
+      description: Retrieves usage statistics and spend for a specific API key.
+      parameters:
+      - $ref: '#/components/parameters/KeyId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsageReport'
+  /organization/usage:
+    get:
+      operationId: getOrganizationUsage
+      tags:
+      - Usage
+      summary: Get organization usage
+      description: Retrieves aggregated usage statistics and spend across the organization.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsageReport'
+components:
+  parameters:
+    KeyId:
+      name: key_id
+      in: path
+      required: true
+      description: Identifier of the API key.
+      schema:
+        type: string
+  schemas:
+    UsageReport:
+      type: object
+      properties:
+        total_cost:
+          type: number
+          description: Total spend in USD over the reporting window.
+        total_requests:
+          type: integer
+        total_tokens:
+          type: integer
+        breakdown:
+          type: array
+          description: Per-model or per-key usage breakdown.
+          items:
+            type: object
+            properties:
+              model:
+                type: string
+              requests:
+                type: integer
+              tokens:
+                type: integer
+              cost:
+                type: number
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Requesty API key passed as a Bearer token in the Authorization header.

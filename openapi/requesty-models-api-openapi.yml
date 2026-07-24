@@ -1,0 +1,72 @@
+openapi: 3.0.1
+info:
+  title: Requesty Router API Keys Models API
+  description: OpenAI-compatible LLM gateway that routes a single API across 300+ models from providers such as OpenAI, Anthropic, DeepSeek, and Together AI, adding intelligent routing, automatic fallbacks, response caching, spend controls, and per-request cost observability. This specification covers the documented inference (chat completions, embeddings, models) and management (API keys, usage/analytics) endpoints of the Requesty Router.
+  termsOfService: https://www.requesty.ai/terms
+  contact:
+    name: Requesty Support
+    email: support@requesty.ai
+  version: '1.0'
+servers:
+- url: https://router.requesty.ai/v1
+  description: Global router
+- url: https://router.eu.requesty.ai/v1
+  description: EU data residency router
+security:
+- bearerAuth: []
+tags:
+- name: Models
+  description: Catalog of routable models.
+paths:
+  /models:
+    get:
+      operationId: listModels
+      tags:
+      - Models
+      summary: List models
+      description: Lists the models available through the Requesty Router with metadata and pricing.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListModelsResponse'
+components:
+  schemas:
+    Model:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Routed model identifier, e.g. `openai/gpt-4o`.
+        object:
+          type: string
+          example: model
+        owned_by:
+          type: string
+          description: Upstream provider.
+        context_window:
+          type: integer
+          description: Maximum context length supported.
+        input_price:
+          type: number
+          description: Input price per million tokens in USD.
+        output_price:
+          type: number
+          description: Output price per million tokens in USD.
+    ListModelsResponse:
+      type: object
+      properties:
+        object:
+          type: string
+          example: list
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Model'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Requesty API key passed as a Bearer token in the Authorization header.

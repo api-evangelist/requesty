@@ -1,0 +1,162 @@
+openapi: 3.0.1
+info:
+  title: Requesty Router API Keys API
+  description: OpenAI-compatible LLM gateway that routes a single API across 300+ models from providers such as OpenAI, Anthropic, DeepSeek, and Together AI, adding intelligent routing, automatic fallbacks, response caching, spend controls, and per-request cost observability. This specification covers the documented inference (chat completions, embeddings, models) and management (API keys, usage/analytics) endpoints of the Requesty Router.
+  termsOfService: https://www.requesty.ai/terms
+  contact:
+    name: Requesty Support
+    email: support@requesty.ai
+  version: '1.0'
+servers:
+- url: https://router.requesty.ai/v1
+  description: Global router
+- url: https://router.eu.requesty.ai/v1
+  description: EU data residency router
+security:
+- bearerAuth: []
+tags:
+- name: API Keys
+  description: Programmatic management of Requesty API keys.
+paths:
+  /api-keys:
+    get:
+      operationId: listApiKeys
+      tags:
+      - API Keys
+      summary: List API keys
+      description: Lists all API keys for the authenticated account.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListApiKeysResponse'
+    post:
+      operationId: createApiKey
+      tags:
+      - API Keys
+      summary: Create an API key
+      description: Creates a new API key with optional spending limit, labels, and expiry.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateApiKeyRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiKey'
+  /api-keys/{key_id}:
+    get:
+      operationId: getApiKey
+      tags:
+      - API Keys
+      summary: Get an API key
+      parameters:
+      - $ref: '#/components/parameters/KeyId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiKey'
+    delete:
+      operationId: deleteApiKey
+      tags:
+      - API Keys
+      summary: Delete an API key
+      parameters:
+      - $ref: '#/components/parameters/KeyId'
+      responses:
+        '200':
+          description: OK
+  /api-keys/{key_id}/limit:
+    patch:
+      operationId: updateApiKeyLimit
+      tags:
+      - API Keys
+      summary: Update API key spending limit
+      parameters:
+      - $ref: '#/components/parameters/KeyId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                limit:
+                  type: number
+                  description: Spending limit in USD.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiKey'
+components:
+  parameters:
+    KeyId:
+      name: key_id
+      in: path
+      required: true
+      description: Identifier of the API key.
+      schema:
+        type: string
+  schemas:
+    CreateApiKeyRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        limit:
+          type: number
+          description: Optional spending limit in USD.
+        labels:
+          type: array
+          items:
+            type: string
+        expiry:
+          type: string
+          format: date-time
+    ApiKey:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        key:
+          type: string
+          description: The API key value, returned only on creation.
+        limit:
+          type: number
+        labels:
+          type: array
+          items:
+            type: string
+        expiry:
+          type: string
+          format: date-time
+        created_at:
+          type: string
+          format: date-time
+    ListApiKeysResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiKey'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Requesty API key passed as a Bearer token in the Authorization header.

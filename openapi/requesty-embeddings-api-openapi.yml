@@ -1,0 +1,98 @@
+openapi: 3.0.1
+info:
+  title: Requesty Router API Keys Embeddings API
+  description: OpenAI-compatible LLM gateway that routes a single API across 300+ models from providers such as OpenAI, Anthropic, DeepSeek, and Together AI, adding intelligent routing, automatic fallbacks, response caching, spend controls, and per-request cost observability. This specification covers the documented inference (chat completions, embeddings, models) and management (API keys, usage/analytics) endpoints of the Requesty Router.
+  termsOfService: https://www.requesty.ai/terms
+  contact:
+    name: Requesty Support
+    email: support@requesty.ai
+  version: '1.0'
+servers:
+- url: https://router.requesty.ai/v1
+  description: Global router
+- url: https://router.eu.requesty.ai/v1
+  description: EU data residency router
+security:
+- bearerAuth: []
+tags:
+- name: Embeddings
+  description: Vector embedding generation.
+paths:
+  /embeddings:
+    post:
+      operationId: createEmbedding
+      tags:
+      - Embeddings
+      summary: Create embeddings
+      description: Generates vector embeddings for the supplied input text using a routed embedding model.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateEmbeddingRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateEmbeddingResponse'
+components:
+  schemas:
+    CreateEmbeddingResponse:
+      type: object
+      properties:
+        object:
+          type: string
+          example: list
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              object:
+                type: string
+                example: embedding
+              index:
+                type: integer
+              embedding:
+                type: array
+                items:
+                  type: number
+        model:
+          type: string
+        usage:
+          $ref: '#/components/schemas/Usage'
+    Usage:
+      type: object
+      properties:
+        prompt_tokens:
+          type: integer
+        completion_tokens:
+          type: integer
+        total_tokens:
+          type: integer
+        cost:
+          type: number
+          description: Requesty USD cost for the request.
+    CreateEmbeddingRequest:
+      type: object
+      required:
+      - model
+      - input
+      properties:
+        model:
+          type: string
+        input:
+          description: Input text or array of text to embed.
+          oneOf:
+          - type: string
+          - type: array
+            items:
+              type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Requesty API key passed as a Bearer token in the Authorization header.
