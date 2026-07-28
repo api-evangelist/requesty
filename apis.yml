@@ -99,6 +99,10 @@ apis:
   description: Programmatically create, list, inspect, and delete API keys and manage
     their spending limits, labels, and expiration for governing gateway access.
 common:
+- type: AgentCard
+  url: a2a/requesty-a2a.yml
+  name: A2A Agent Card
+  description: Agent Card served at /.well-known/agent-card.json (near-conformant against A2A 1.0.0).
 - type: AgenticAccess
   url: agentic-access/requesty-agentic-access.yml
 - type: TrustCenter

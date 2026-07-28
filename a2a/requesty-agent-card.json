@@ -1,0 +1,181 @@
+{
+  "protocolVersion": "1.0",
+  "name": "Requesty",
+  "description": "AI gateway and LLM router for 600+ models. Intelligent routing, caching, failover, observability, and enterprise governance through a single OpenAI-compatible API.",
+  "version": "1.0.0",
+  "documentationUrl": "https://docs.requesty.ai",
+  "iconUrl": "https://www.requesty.ai/Requesty_logo.svg",
+  "provider": {
+    "organization": "Requesty",
+    "url": "https://www.requesty.ai"
+  },
+  "supportedInterfaces": [
+    {
+      "url": "https://router.requesty.ai/v1",
+      "protocolBinding": "HTTP/REST",
+      "protocolVersion": "1.0"
+    }
+  ],
+  "capabilities": {
+    "streaming": true,
+    "pushNotifications": false,
+    "extendedAgentCard": false
+  },
+  "defaultInputModes": [
+    "application/json"
+  ],
+  "defaultOutputModes": [
+    "application/json",
+    "text/event-stream"
+  ],
+  "securitySchemes": {
+    "bearer": {
+      "type": "http",
+      "scheme": "bearer",
+      "description": "API key from https://app.requesty.ai"
+    }
+  },
+  "security": [
+    {
+      "bearer": []
+    }
+  ],
+  "skills": [
+    {
+      "id": "chat-completions",
+      "name": "Chat Completions",
+      "description": "POST /v1/chat/completions - Send chat completion requests to 600+ AI models. Supports streaming, function calling, structured outputs, vision, and extended thinking. Docs: https://docs.requesty.ai/api-reference/endpoint/chat-completions-create",
+      "tags": [
+        "llm",
+        "chat",
+        "completions",
+        "openai-compatible"
+      ],
+      "inputModes": [
+        "application/json"
+      ],
+      "outputModes": [
+        "application/json",
+        "text/event-stream"
+      ]
+    },
+    {
+      "id": "responses-api",
+      "name": "Responses API",
+      "description": "POST /v1/responses - OpenAI Responses API for multi-turn conversations with built-in tool use, web search, file search, and computer use. Docs: https://docs.requesty.ai/api-reference/endpoint/responses-create",
+      "tags": [
+        "responses",
+        "openai",
+        "agents",
+        "tool-use"
+      ],
+      "inputModes": [
+        "application/json"
+      ],
+      "outputModes": [
+        "application/json",
+        "text/event-stream"
+      ]
+    },
+    {
+      "id": "messages-api",
+      "name": "Messages API",
+      "description": "POST /v1/messages - Anthropic Messages API for Claude models with native support for extended thinking, tool use, and vision. Docs: https://docs.requesty.ai/api-reference/endpoint/messages-create",
+      "tags": [
+        "messages",
+        "anthropic",
+        "claude"
+      ],
+      "inputModes": [
+        "application/json"
+      ],
+      "outputModes": [
+        "application/json",
+        "text/event-stream"
+      ]
+    },
+    {
+      "id": "model-routing",
+      "name": "Intelligent Model Routing",
+      "description": "Route requests across 30+ providers by cost, latency, or availability. Weighted load balancing, automatic failover chains, and latency-based routing. Docs: https://docs.requesty.ai/features/fallback-policies",
+      "tags": [
+        "routing",
+        "load-balancing",
+        "failover"
+      ],
+      "inputModes": [
+        "application/json"
+      ],
+      "outputModes": [
+        "application/json"
+      ]
+    },
+    {
+      "id": "embeddings",
+      "name": "Embeddings",
+      "description": "POST /v1/embeddings - Generate text embeddings using models from OpenAI, Cohere, Voyage, and more. Docs: https://docs.requesty.ai/api-reference/endpoint/embeddings-create",
+      "tags": [
+        "embeddings",
+        "vectors"
+      ],
+      "inputModes": [
+        "application/json"
+      ],
+      "outputModes": [
+        "application/json"
+      ]
+    },
+    {
+      "id": "mcp-gateway",
+      "name": "MCP Gateway",
+      "description": "Unified gateway connecting AI coding tools (Cursor, Claude Code, VS Code) to any MCP server with auth, analytics, and management. Docs: https://docs.requesty.ai/features/mcp-gateway",
+      "tags": [
+        "mcp",
+        "gateway",
+        "tools",
+        "cursor",
+        "claude-code"
+      ],
+      "inputModes": [
+        "application/json"
+      ],
+      "outputModes": [
+        "application/json"
+      ]
+    },
+    {
+      "id": "images",
+      "name": "Image Generation and Editing",
+      "description": "POST /v1/images/generations and /v1/images/edits - Generate and edit images using DALL-E, Stable Diffusion, and other models. Docs: https://docs.requesty.ai/api-reference/endpoint/images-generations-create",
+      "tags": [
+        "images",
+        "generation",
+        "editing",
+        "dall-e"
+      ],
+      "inputModes": [
+        "application/json"
+      ],
+      "outputModes": [
+        "application/json"
+      ]
+    },
+    {
+      "id": "audio",
+      "name": "Audio (TTS and Transcription)",
+      "description": "POST /v1/audio/speech for text-to-speech, POST /v1/audio/transcriptions for speech-to-text. Docs: https://docs.requesty.ai/api-reference/endpoint/audio-speech-create",
+      "tags": [
+        "audio",
+        "tts",
+        "speech",
+        "transcription"
+      ],
+      "inputModes": [
+        "application/json"
+      ],
+      "outputModes": [
+        "application/json"
+      ]
+    }
+  ]
+}
