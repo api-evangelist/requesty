@@ -18,86 +18,106 @@ created: '2026-06-20'
 modified: '2026-06-20'
 specificationVersion: '0.19'
 apis:
-- aid: requesty:requesty-chat-completions-api
-  name: Requesty Chat Completions API
-  tags:
-  - Chat
-  - Completions
-  - Routing
-  - LLM
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.requesty.ai/api-reference/endpoint/chat-completions-create
-  baseURL: https://router.requesty.ai/v1
-  properties:
-  - url: https://docs.requesty.ai
-    type: Documentation
-  - url: https://docs.requesty.ai/api-reference/endpoint/chat-completions-create
-    type: APIReference
-  - url: openapi/requesty-openapi.yml
-    type: OpenAPI
-  - url: asyncapi/requesty-asyncapi.yml
-    type: AsyncAPI
-  - url: collections/requesty.postman_collection.json
-    type: Postman
-  description: OpenAI-compatible chat completions routed across 300+ models from OpenAI,
-    Anthropic, DeepSeek, Together AI, and more, with streaming, tool use, web search,
-    automatic fallbacks, and response caching.
-- aid: requesty:requesty-models-api
-  name: Requesty Models API
-  tags:
-  - Models
-  - Catalog
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.requesty.ai
-  baseURL: https://router.requesty.ai/v1
-  properties:
-  - url: https://docs.requesty.ai
-    type: Documentation
-  - url: https://www.requesty.ai/models
-    type: APIReference
-  - url: openapi/requesty-openapi.yml
-    type: OpenAPI
-  - url: collections/requesty.postman_collection.json
-    type: Postman
-  description: Lists the 300+ models routable through the Requesty gateway with their
-    identifiers, provider, context length, and per-token pricing.
-- aid: requesty:requesty-usage-analytics-api
-  name: Requesty Usage & Analytics API
-  tags:
-  - Usage
-  - Analytics
-  - Observability
-  - FinOps
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.requesty.ai
-  baseURL: https://router.requesty.ai/v1
-  properties:
-  - url: https://docs.requesty.ai
-    type: Documentation
-  - url: openapi/requesty-openapi.yml
-    type: OpenAPI
-  - url: collections/requesty.postman_collection.json
-    type: Postman
-  description: Retrieves per-key and organization-level usage statistics, request
-    cost, and spend reporting for observability and FinOps across the gateway.
 - aid: requesty:requesty-api-keys-api
   name: Requesty API Keys API
+  description: Programmatic management of Requesty API keys.
+  humanURL: https://docs.requesty.ai/api-reference/endpoint/chat-completions-create
+  baseURL: https://router.requesty.ai/v1
   tags:
   - API Keys
-  - Management
-  - Governance
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://app.requesty.ai/api-keys
-  baseURL: https://router.requesty.ai/v1
   properties:
-  - url: https://docs.requesty.ai
-    type: Documentation
-  - url: openapi/requesty-openapi.yml
-    type: OpenAPI
-  - url: collections/requesty.postman_collection.json
-    type: Postman
-  description: Programmatically create, list, inspect, and delete API keys and manage
-    their spending limits, labels, and expiration for governing gateway access.
+  - type: OpenAPI
+    url: openapi/requesty-api-keys-api-openapi.yml
+  - type: Documentation
+    url: https://docs.requesty.ai
+  - type: APIReference
+    url: https://docs.requesty.ai/api-reference/endpoint/chat-completions-create
+  - type: AsyncAPI
+    url: asyncapi/requesty-asyncapi.yml
+  - type: Postman
+    url: collections/requesty.postman_collection.json
+  - type: APIReference
+    url: https://www.requesty.ai/models
+- aid: requesty:requesty-chat-api
+  name: Requesty Chat API
+  description: OpenAI-compatible chat completions routed across providers.
+  humanURL: https://docs.requesty.ai/api-reference/endpoint/chat-completions-create
+  baseURL: https://router.requesty.ai/v1
+  tags:
+  - Chat
+  properties:
+  - type: OpenAPI
+    url: openapi/requesty-chat-api-openapi.yml
+  - type: Documentation
+    url: https://docs.requesty.ai
+  - type: APIReference
+    url: https://docs.requesty.ai/api-reference/endpoint/chat-completions-create
+  - type: AsyncAPI
+    url: asyncapi/requesty-asyncapi.yml
+  - type: Postman
+    url: collections/requesty.postman_collection.json
+  - type: APIReference
+    url: https://www.requesty.ai/models
+- aid: requesty:requesty-embeddings-api
+  name: Requesty Embeddings API
+  description: Vector embedding generation.
+  humanURL: https://docs.requesty.ai/api-reference/endpoint/chat-completions-create
+  baseURL: https://router.requesty.ai/v1
+  tags:
+  - Embeddings
+  properties:
+  - type: OpenAPI
+    url: openapi/requesty-embeddings-api-openapi.yml
+  - type: Documentation
+    url: https://docs.requesty.ai
+  - type: APIReference
+    url: https://docs.requesty.ai/api-reference/endpoint/chat-completions-create
+  - type: AsyncAPI
+    url: asyncapi/requesty-asyncapi.yml
+  - type: Postman
+    url: collections/requesty.postman_collection.json
+  - type: APIReference
+    url: https://www.requesty.ai/models
+- aid: requesty:requesty-models-api
+  name: Requesty Models API
+  description: Catalog of routable models.
+  humanURL: https://docs.requesty.ai/api-reference/endpoint/chat-completions-create
+  baseURL: https://router.requesty.ai/v1
+  tags:
+  - Models
+  properties:
+  - type: OpenAPI
+    url: openapi/requesty-models-api-openapi.yml
+  - type: Documentation
+    url: https://docs.requesty.ai
+  - type: APIReference
+    url: https://docs.requesty.ai/api-reference/endpoint/chat-completions-create
+  - type: AsyncAPI
+    url: asyncapi/requesty-asyncapi.yml
+  - type: Postman
+    url: collections/requesty.postman_collection.json
+  - type: APIReference
+    url: https://www.requesty.ai/models
+- aid: requesty:requesty-usage-api
+  name: Requesty Usage API
+  description: Usage statistics and spend reporting.
+  humanURL: https://docs.requesty.ai/api-reference/endpoint/chat-completions-create
+  baseURL: https://router.requesty.ai/v1
+  tags:
+  - Usage
+  properties:
+  - type: OpenAPI
+    url: openapi/requesty-usage-api-openapi.yml
+  - type: Documentation
+    url: https://docs.requesty.ai
+  - type: APIReference
+    url: https://docs.requesty.ai/api-reference/endpoint/chat-completions-create
+  - type: AsyncAPI
+    url: asyncapi/requesty-asyncapi.yml
+  - type: Postman
+    url: collections/requesty.postman_collection.json
+  - type: APIReference
+    url: https://www.requesty.ai/models
 common:
 - type: AgentCard
   url: a2a/requesty-a2a.yml
