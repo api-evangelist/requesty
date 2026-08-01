@@ -1,0 +1,22 @@
+{
+  "provider": "requesty",
+  "sources": [
+    "requesty-api-keys-api-openapi.yml",
+    "requesty-chat-api-openapi.yml",
+    "requesty-embeddings-api-openapi.yml",
+    "requesty-models-api-openapi.yml",
+    "requesty-usage-api-openapi.yml"
+  ],
+  "outputs": [
+    "requesty-api-keys-api-openapi.yml",
+    "requesty-chat-api-openapi.yml",
+    "requesty-embeddings-api-openapi.yml",
+    "requesty-models-api-openapi.yml",
+    "requesty-usage-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
