@@ -1,0 +1,219 @@
+{
+  "item": [
+    {
+      "id": "3dbcfbfe-e88f-4da1-883d-237df2251a52",
+      "name": "Usage",
+      "description": {
+        "content": "Usage statistics and spend reporting.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6dc4a819-02b0-4903-94cb-19eb245a5b73",
+          "name": "Get API key usage",
+          "request": {
+            "name": "Get API key usage",
+            "description": {
+              "content": "Retrieves usage statistics and spend for a specific API key.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api-keys",
+                ":key_id",
+                "usage"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "key_id",
+                  "description": "(Required) Identifier of the API key."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a8384f33-f3eb-4532-a832-7aec4c478fa2",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api-keys",
+                    ":key_id",
+                    "usage"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key_id",
+                      "description": "(Required) Identifier of the API key."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total_cost\": 8903.697801118913,\n  \"total_requests\": 1803,\n  \"total_tokens\": 1664,\n  \"breakdown\": [\n    {\n      \"model\": \"string\",\n      \"requests\": 9431,\n      \"tokens\": 5191,\n      \"cost\": 3569.5533492942145\n    },\n    {\n      \"model\": \"string\",\n      \"requests\": 4811,\n      \"tokens\": 43,\n      \"cost\": 3969.5127749874705\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6a0fed85-ecf7-4578-b797-da979d7ca532",
+          "name": "Get organization usage",
+          "request": {
+            "name": "Get organization usage",
+            "description": {
+              "content": "Retrieves aggregated usage statistics and spend across the organization.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organization",
+                "usage"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "40acdef9-5ae4-4439-a982-955b90a86de3",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organization",
+                    "usage"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total_cost\": 3795.464270788832,\n  \"total_requests\": 5345,\n  \"total_tokens\": 8228,\n  \"breakdown\": [\n    {\n      \"model\": \"string\",\n      \"requests\": 6490,\n      \"tokens\": 2763,\n      \"cost\": 3763.047470399835\n    },\n    {\n      \"model\": \"string\",\n      \"requests\": 7349,\n      \"tokens\": 8641,\n      \"cost\": 247.52445981971016\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://router.requesty.ai/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "7eb71817-ad26-4eb5-a788-b9185e499208",
+    "name": "Requesty Router API Keys Usage API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "OpenAI-compatible LLM gateway that routes a single API across 300+ models from providers such as OpenAI, Anthropic, DeepSeek, and Together AI, adding intelligent routing, automatic fallbacks, response caching, spend controls, and per-request cost observability. This specification covers the documented inference (chat completions, embeddings, models) and management (API keys, usage/analytics) endpoints of the Requesty Router.\n\nContact Support:\n Name: Requesty Support\n Email: support@requesty.ai",
+      "type": "text/plain"
+    }
+  }
+}

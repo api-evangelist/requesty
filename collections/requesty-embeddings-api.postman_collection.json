@@ -1,0 +1,140 @@
+{
+  "item": [
+    {
+      "id": "26b8e969-52b2-40b4-aa39-a3c214d5f27c",
+      "name": "Embeddings",
+      "description": {
+        "content": "Vector embedding generation.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7fcf140c-8272-46c3-a4a9-90e4738146f7",
+          "name": "Create embeddings",
+          "request": {
+            "name": "Create embeddings",
+            "description": {
+              "content": "Generates vector embeddings for the supplied input text using a routed embedding model.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "embeddings"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"model\": \"<string>\",\n  \"input\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0dfa0f95-75ff-4334-8afb-0aca0472f559",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "embeddings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"model\": \"<string>\",\n  \"input\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"object\": \"list\",\n  \"data\": [\n    {\n      \"object\": \"embedding\",\n      \"index\": 9230,\n      \"embedding\": [\n        1405.053289471865,\n        3404.544399460717\n      ]\n    },\n    {\n      \"object\": \"embedding\",\n      \"index\": 6842,\n      \"embedding\": [\n        6362.092428246721,\n        4040.8331451112235\n      ]\n    }\n  ],\n  \"model\": \"string\",\n  \"usage\": {\n    \"prompt_tokens\": 7127,\n    \"completion_tokens\": 920,\n    \"total_tokens\": 265,\n    \"cost\": 1973.0921813256607\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://router.requesty.ai/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "90f15a25-2264-4709-99f3-bc6b1297af5e",
+    "name": "Requesty Router API Keys Embeddings API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "OpenAI-compatible LLM gateway that routes a single API across 300+ models from providers such as OpenAI, Anthropic, DeepSeek, and Together AI, adding intelligent routing, automatic fallbacks, response caching, spend controls, and per-request cost observability. This specification covers the documented inference (chat completions, embeddings, models) and management (API keys, usage/analytics) endpoints of the Requesty Router.\n\nContact Support:\n Name: Requesty Support\n Email: support@requesty.ai",
+      "type": "text/plain"
+    }
+  }
+}

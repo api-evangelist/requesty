@@ -1,0 +1,119 @@
+{
+  "item": [
+    {
+      "id": "4b18f0b8-68ad-4517-8160-69924581c4c2",
+      "name": "Models",
+      "description": {
+        "content": "Catalog of routable models.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "72a0b0a8-1aff-41cb-a7a2-57e83ff2fed1",
+          "name": "List models",
+          "request": {
+            "name": "List models",
+            "description": {
+              "content": "Lists the models available through the Requesty Router with metadata and pricing.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "models"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d70f546a-1e81-4dca-bb09-02cf6b4bb408",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "models"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"object\": \"list\",\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"object\": \"model\",\n      \"owned_by\": \"string\",\n      \"context_window\": 6513,\n      \"input_price\": 3743.87351290695,\n      \"output_price\": 7117.219646560719\n    },\n    {\n      \"id\": \"string\",\n      \"object\": \"model\",\n      \"owned_by\": \"string\",\n      \"context_window\": 8546,\n      \"input_price\": 2329.802588957145,\n      \"output_price\": 5916.211765690511\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://router.requesty.ai/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "32b72b38-fb7c-4352-8294-f6a9c512c15e",
+    "name": "Requesty Router API Keys Models API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "OpenAI-compatible LLM gateway that routes a single API across 300+ models from providers such as OpenAI, Anthropic, DeepSeek, and Together AI, adding intelligent routing, automatic fallbacks, response caching, spend controls, and per-request cost observability. This specification covers the documented inference (chat completions, embeddings, models) and management (API keys, usage/analytics) endpoints of the Requesty Router.\n\nContact Support:\n Name: Requesty Support\n Email: support@requesty.ai",
+      "type": "text/plain"
+    }
+  }
+}

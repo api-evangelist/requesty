@@ -1,0 +1,54 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Requesty Router API Keys Usage API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Usage",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get API key usage",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://router.requesty.ai/v1/api-keys/:key_id/usage",
+            "params": [
+              {
+                "name": "key_id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of the API key."
+              }
+            ]
+          },
+          "docs": "Retrieves usage statistics and spend for a specific API key."
+        },
+        {
+          "info": {
+            "name": "Get organization usage",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://router.requesty.ai/v1/organization/usage"
+          },
+          "docs": "Retrieves aggregated usage statistics and spend across the organization."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
