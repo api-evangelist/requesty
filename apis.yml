@@ -9,6 +9,12 @@ description: Requesty is an LLM routing and gateway platform that exposes a sing
   top of unified inference.
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
+- Artificial Intelligence
+- LLM
+- Routing
+- Gateway
+- Observability
+tags_raw:
 - AI
 - LLM
 - Routing
@@ -24,6 +30,8 @@ apis:
   humanURL: https://docs.requesty.ai/api-reference/endpoint/chat-completions-create
   baseURL: https://router.requesty.ai/v1
   tags:
+  - APIKeys
+  tags_raw:
   - API Keys
   properties:
   - type: OpenAPI
