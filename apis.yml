@@ -7,6 +7,18 @@ description: Requesty is an LLM routing and gateway platform that exposes a sing
   DeepSeek, and Together AI. The Requesty Router adds intelligent routing, automatic
   fallbacks, response caching, spend controls, and per-request cost observability on
   top of unified inference.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
 - Artificial Intelligence
