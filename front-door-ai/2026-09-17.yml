@@ -1,0 +1,33 @@
+# Front Door AI Index — requesty — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: requesty
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: www.requesty.ai
+  final_host: www.requesty.ai
+  ownership: own
+  owner: requesty
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 37
+  host_score: 37
+  density: 28.24
+  words: 1310
+  tiers:
+    agentic: 1
+    core: 21
+    model: 15
+  ambiguous: 11
+  top_terms:
+    AI: 17
+    OpenAI: 10
+    agent: 7
+    LLMs: 4
+    smart: 4
+    Anthropic: 3
+    Claude: 1
+    Gemini: 1
+    prompts: 1

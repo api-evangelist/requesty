@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Requesty Router API Keys Embeddings API
+  title: Requesty Router Embeddings API
   description: OpenAI-compatible LLM gateway that routes a single API across 300+ models from providers such as OpenAI, Anthropic, DeepSeek, and Together AI, adding intelligent routing, automatic fallbacks, response caching, spend controls, and per-request cost observability. This specification covers the documented inference (chat completions, embeddings, models) and management (API keys, usage/analytics) endpoints of the Requesty Router.
   termsOfService: https://www.requesty.ai/terms
   contact:
@@ -64,18 +64,6 @@ components:
           type: string
         usage:
           $ref: '#/components/schemas/Usage'
-    Usage:
-      type: object
-      properties:
-        prompt_tokens:
-          type: integer
-        completion_tokens:
-          type: integer
-        total_tokens:
-          type: integer
-        cost:
-          type: number
-          description: Requesty USD cost for the request.
     CreateEmbeddingRequest:
       type: object
       required:
@@ -91,6 +79,18 @@ components:
           - type: array
             items:
               type: string
+    Usage:
+      type: object
+      properties:
+        prompt_tokens:
+          type: integer
+        completion_tokens:
+          type: integer
+        total_tokens:
+          type: integer
+        cost:
+          type: number
+          description: Requesty USD cost for the request.
   securitySchemes:
     bearerAuth:
       type: http
