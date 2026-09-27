@@ -133,6 +133,13 @@ components:
         created_at:
           type: string
           format: date-time
+    ListApiKeysResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiKey'
     CreateApiKeyRequest:
       type: object
       properties:
@@ -148,13 +155,6 @@ components:
         expiry:
           type: string
           format: date-time
-    ListApiKeysResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiKey'
   securitySchemes:
     bearerAuth:
       type: http

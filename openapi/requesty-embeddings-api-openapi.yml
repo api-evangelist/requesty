@@ -40,6 +40,21 @@ paths:
                 $ref: '#/components/schemas/CreateEmbeddingResponse'
 components:
   schemas:
+    CreateEmbeddingRequest:
+      type: object
+      required:
+      - model
+      - input
+      properties:
+        model:
+          type: string
+        input:
+          description: Input text or array of text to embed.
+          oneOf:
+          - type: string
+          - type: array
+            items:
+              type: string
     CreateEmbeddingResponse:
       type: object
       properties:
@@ -64,21 +79,6 @@ components:
           type: string
         usage:
           $ref: '#/components/schemas/Usage'
-    CreateEmbeddingRequest:
-      type: object
-      required:
-      - model
-      - input
-      properties:
-        model:
-          type: string
-        input:
-          description: Input text or array of text to embed.
-          oneOf:
-          - type: string
-          - type: array
-            items:
-              type: string
     Usage:
       type: object
       properties:
