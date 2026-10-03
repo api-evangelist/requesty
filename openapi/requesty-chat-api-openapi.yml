@@ -50,6 +50,63 @@ paths:
           description: Too many requests
 components:
   schemas:
+    Usage:
+      type: object
+      properties:
+        prompt_tokens:
+          type: integer
+        completion_tokens:
+          type: integer
+        total_tokens:
+          type: integer
+        cost:
+          type: number
+          description: Requesty USD cost for the request.
+    ChatMessage:
+      type: object
+      required:
+      - role
+      - content
+      properties:
+        role:
+          type: string
+          enum:
+          - system
+          - user
+          - assistant
+          - tool
+        content:
+          description: The contents of the message; string or array of content parts.
+          oneOf:
+          - type: string
+          - type: array
+            items:
+              type: object
+    CreateChatCompletionResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        object:
+          type: string
+          example: chat.completion
+        created:
+          type: integer
+        model:
+          type: string
+        choices:
+          type: array
+          items:
+            type: object
+            properties:
+              index:
+                type: integer
+              message:
+                $ref: '#/components/schemas/ChatMessage'
+              finish_reason:
+                type: string
+        usage:
+          $ref: '#/components/schemas/Usage'
     CreateChatCompletionRequest:
       type: object
       required:
@@ -91,63 +148,6 @@ components:
         response_format:
           type: object
           description: An object specifying the format the model must output (e.g. JSON / structured outputs), where supported by the routed model.
-    ChatMessage:
-      type: object
-      required:
-      - role
-      - content
-      properties:
-        role:
-          type: string
-          enum:
-          - system
-          - user
-          - assistant
-          - tool
-        content:
-          description: The contents of the message; string or array of content parts.
-          oneOf:
-          - type: string
-          - type: array
-            items:
-              type: object
-    Usage:
-      type: object
-      properties:
-        prompt_tokens:
-          type: integer
-        completion_tokens:
-          type: integer
-        total_tokens:
-          type: integer
-        cost:
-          type: number
-          description: Requesty USD cost for the request.
-    CreateChatCompletionResponse:
-      type: object
-      properties:
-        id:
-          type: string
-        object:
-          type: string
-          example: chat.completion
-        created:
-          type: integer
-        model:
-          type: string
-        choices:
-          type: array
-          items:
-            type: object
-            properties:
-              index:
-                type: integer
-              message:
-                $ref: '#/components/schemas/ChatMessage'
-              finish_reason:
-                type: string
-        usage:
-          $ref: '#/components/schemas/Usage'
   securitySchemes:
     bearerAuth:
       type: http

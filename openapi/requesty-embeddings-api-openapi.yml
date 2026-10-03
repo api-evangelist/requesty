@@ -40,6 +40,18 @@ paths:
                 $ref: '#/components/schemas/CreateEmbeddingResponse'
 components:
   schemas:
+    Usage:
+      type: object
+      properties:
+        prompt_tokens:
+          type: integer
+        completion_tokens:
+          type: integer
+        total_tokens:
+          type: integer
+        cost:
+          type: number
+          description: Requesty USD cost for the request.
     CreateEmbeddingRequest:
       type: object
       required:
@@ -79,18 +91,6 @@ components:
           type: string
         usage:
           $ref: '#/components/schemas/Usage'
-    Usage:
-      type: object
-      properties:
-        prompt_tokens:
-          type: integer
-        completion_tokens:
-          type: integer
-        total_tokens:
-          type: integer
-        cost:
-          type: number
-          description: Requesty USD cost for the request.
   securitySchemes:
     bearerAuth:
       type: http
