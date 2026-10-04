@@ -102,7 +102,22 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApiKey'
 components:
+  parameters:
+    KeyId:
+      name: key_id
+      in: path
+      required: true
+      description: Identifier of the API key.
+      schema:
+        type: string
   schemas:
+    ListApiKeysResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiKey'
     ApiKey:
       type: object
       properties:
@@ -140,21 +155,6 @@ components:
         expiry:
           type: string
           format: date-time
-    ListApiKeysResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiKey'
-  parameters:
-    KeyId:
-      name: key_id
-      in: path
-      required: true
-      description: Identifier of the API key.
-      schema:
-        type: string
   securitySchemes:
     bearerAuth:
       type: http

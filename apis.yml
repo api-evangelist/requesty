@@ -76,26 +76,6 @@ apis:
     url: collections/requesty.postman_collection.json
   - type: APIReference
     url: https://www.requesty.ai/models
-- aid: requesty:requesty-chat-api
-  name: Requesty Chat API
-  description: OpenAI-compatible chat completions routed across providers.
-  humanURL: https://docs.requesty.ai/api-reference/endpoint/chat-completions-create
-  baseURL: https://router.requesty.ai/v1
-  tags:
-  - Chat
-  properties:
-  - type: OpenAPI
-    url: openapi/requesty-chat-api-openapi.yml
-  - type: Documentation
-    url: https://docs.requesty.ai
-  - type: APIReference
-    url: https://docs.requesty.ai/api-reference/endpoint/chat-completions-create
-  - type: AsyncAPI
-    url: asyncapi/requesty-asyncapi.yml
-  - type: Postman
-    url: collections/requesty.postman_collection.json
-  - type: APIReference
-    url: https://www.requesty.ai/models
 - aid: requesty:requesty-embeddings-api
   name: Requesty Embeddings API
   description: Vector embedding generation.
@@ -146,6 +126,26 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/requesty-usage-api-openapi.yml
+  - type: Documentation
+    url: https://docs.requesty.ai
+  - type: APIReference
+    url: https://docs.requesty.ai/api-reference/endpoint/chat-completions-create
+  - type: AsyncAPI
+    url: asyncapi/requesty-asyncapi.yml
+  - type: Postman
+    url: collections/requesty.postman_collection.json
+  - type: APIReference
+    url: https://www.requesty.ai/models
+- aid: requesty:requesty-chat-completions-api
+  name: Requesty Chat Completions API
+  description: OpenAI-compatible chat completions routed across providers.
+  humanURL: https://docs.requesty.ai/api-reference/endpoint/chat-completions-create
+  baseURL: https://router.requesty.ai/v1
+  tags:
+  - Chat Completions
+  properties:
+  - type: OpenAPI
+    url: openapi/requesty-chat-completions-api-openapi.yml
   - type: Documentation
     url: https://docs.requesty.ai
   - type: APIReference

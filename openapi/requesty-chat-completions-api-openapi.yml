@@ -15,14 +15,14 @@ servers:
 security:
 - bearerAuth: []
 tags:
-- name: Chat
+- name: Chat Completions
   description: OpenAI-compatible chat completions routed across providers.
 paths:
   /chat/completions:
     post:
       operationId: createChatCompletion
       tags:
-      - Chat
+      - Chat Completions
       summary: Create a chat completion
       description: 'Creates a model response for the given chat conversation. Requesty routes the request to the best available provider for the requested model, applying fallbacks and caching. OpenAI-compatible. Set `stream: true` to receive the response as Server-Sent Events.'
       requestBody:
@@ -50,18 +50,6 @@ paths:
           description: Too many requests
 components:
   schemas:
-    Usage:
-      type: object
-      properties:
-        prompt_tokens:
-          type: integer
-        completion_tokens:
-          type: integer
-        total_tokens:
-          type: integer
-        cost:
-          type: number
-          description: Requesty USD cost for the request.
     ChatMessage:
       type: object
       required:
@@ -82,6 +70,18 @@ components:
           - type: array
             items:
               type: object
+    Usage:
+      type: object
+      properties:
+        prompt_tokens:
+          type: integer
+        completion_tokens:
+          type: integer
+        total_tokens:
+          type: integer
+        cost:
+          type: number
+          description: Requesty USD cost for the request.
     CreateChatCompletionResponse:
       type: object
       properties:
