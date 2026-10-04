@@ -157,6 +157,9 @@ apis:
   - type: APIReference
     url: https://www.requesty.ai/models
 common:
+- type: CapabilityMap
+  url: capabilities/requesty-capability-edges.yml
+  name: Requesty Business Capability Map
 - type: AgentCard
   url: a2a/requesty-a2a.yml
   name: A2A Agent Card
