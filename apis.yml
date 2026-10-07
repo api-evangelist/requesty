@@ -157,6 +157,8 @@ apis:
   - type: APIReference
     url: https://www.requesty.ai/models
 common:
+- type: Pricing
+  url: https://www.requesty.ai/pricing
 - type: CapabilityMap
   url: capabilities/requesty-capability-edges.yml
   name: Requesty Business Capability Map
