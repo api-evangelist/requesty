@@ -1,0 +1,23 @@
+edges:
+- partner_name: OpenAI
+  partner: openai
+  partner_match: domain
+  type: contract
+  channel: provider-built
+  relationship: compatible
+  direction: provider-built
+  evidence: https://github.com/api-evangelist/requesty/blob/main/openapi/requesty-chat-completions-api-openapi.yml#L4
+  contract_reference:
+    repo: requesty
+    spec_file: requesty-chat-completions-api-openapi.yml
+    property: description
+    value: OpenAI-compatible
+    note: 'requesty declares OpenAI compatibility: ''description: OpenAI-compatible LLM gateway that routes a single
+      API across 300+ models from providers such as OpenAI, Anthropic, DeepSeek, and Together AI, addi'''
+    detected_by: sweep-model-routing.py
+    detected: '2026-10-13'
+  detected_by: sweep-model-routing.py
+  first_seen: '2026-10-13'
+generated: '2026-10-13'
+method: searched
+checked: []
