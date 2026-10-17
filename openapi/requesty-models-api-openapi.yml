@@ -34,16 +34,6 @@ paths:
                 $ref: '#/components/schemas/ListModelsResponse'
 components:
   schemas:
-    ListModelsResponse:
-      type: object
-      properties:
-        object:
-          type: string
-          example: list
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Model'
     Model:
       type: object
       properties:
@@ -65,6 +55,16 @@ components:
         output_price:
           type: number
           description: Output price per million tokens in USD.
+    ListModelsResponse:
+      type: object
+      properties:
+        object:
+          type: string
+          example: list
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Model'
   securitySchemes:
     bearerAuth:
       type: http

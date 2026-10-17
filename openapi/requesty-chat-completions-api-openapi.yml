@@ -50,6 +50,31 @@ paths:
           description: Too many requests
 components:
   schemas:
+    CreateChatCompletionResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        object:
+          type: string
+          example: chat.completion
+        created:
+          type: integer
+        model:
+          type: string
+        choices:
+          type: array
+          items:
+            type: object
+            properties:
+              index:
+                type: integer
+              message:
+                $ref: '#/components/schemas/ChatMessage'
+              finish_reason:
+                type: string
+        usage:
+          $ref: '#/components/schemas/Usage'
     ChatMessage:
       type: object
       required:
@@ -82,31 +107,6 @@ components:
         cost:
           type: number
           description: Requesty USD cost for the request.
-    CreateChatCompletionResponse:
-      type: object
-      properties:
-        id:
-          type: string
-        object:
-          type: string
-          example: chat.completion
-        created:
-          type: integer
-        model:
-          type: string
-        choices:
-          type: array
-          items:
-            type: object
-            properties:
-              index:
-                type: integer
-              message:
-                $ref: '#/components/schemas/ChatMessage'
-              finish_reason:
-                type: string
-        usage:
-          $ref: '#/components/schemas/Usage'
     CreateChatCompletionRequest:
       type: object
       required:

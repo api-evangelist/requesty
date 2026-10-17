@@ -102,14 +102,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApiKey'
 components:
-  parameters:
-    KeyId:
-      name: key_id
-      in: path
-      required: true
-      description: Identifier of the API key.
-      schema:
-        type: string
   schemas:
     ListApiKeysResponse:
       type: object
@@ -118,6 +110,21 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ApiKey'
+    CreateApiKeyRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        limit:
+          type: number
+          description: Optional spending limit in USD.
+        labels:
+          type: array
+          items:
+            type: string
+        expiry:
+          type: string
+          format: date-time
     ApiKey:
       type: object
       properties:
@@ -140,21 +147,14 @@ components:
         created_at:
           type: string
           format: date-time
-    CreateApiKeyRequest:
-      type: object
-      properties:
-        name:
-          type: string
-        limit:
-          type: number
-          description: Optional spending limit in USD.
-        labels:
-          type: array
-          items:
-            type: string
-        expiry:
-          type: string
-          format: date-time
+  parameters:
+    KeyId:
+      name: key_id
+      in: path
+      required: true
+      description: Identifier of the API key.
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http
