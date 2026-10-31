@@ -1,4 +1,4 @@
-# Requesty (requesty)
+# Requesty
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,118 +66,145 @@
 
 Requesty is an LLM routing and gateway platform that exposes a single OpenAI-compatible API across 300+ models from providers like OpenAI, Anthropic, DeepSeek, and Together AI. The Requesty Router adds intelligent routing, automatic fallbacks, response caching, spend controls, and per-request cost observability on top of unified inference.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/requesty/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/requesty/refs/heads/main/apis.yml)
+**Areas:** Artificial Intelligence · LLM · Routing · Gateways · Observability · Real-Time · A2A
 
-## Tags
+## Requesty on APIs.io
 
-- AI
-- LLM
-- Routing
-- Gateway
-- Observability
+Everything profiled for Requesty is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/requesty/](https://apis.io/providers/requesty/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (5)
 
-- **Created:** 2026-06-20
-- **Modified:** 2026-06-20
+- [Requesty API Keys API](https://apis.io/apis/requesty/requesty-api-keys-api/) — Programmatic management of Requesty API keys.
+- [Requesty Embeddings API](https://apis.io/apis/requesty/requesty-embeddings-api/) — Vector embedding generation.
+- [Requesty Models API](https://apis.io/apis/requesty/requesty-models-api/) — Catalog of routable models.
+- [Requesty Usage API](https://apis.io/apis/requesty/requesty-usage-api/) — Usage statistics and spend reporting.
+- [Requesty Chat Completions API](https://apis.io/apis/requesty/requesty-chat-completions-api/) — OpenAI-compatible chat completions routed across providers.
 
-## APIs
+### Published properties
 
-### Requesty Chat Completions API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-OpenAI-compatible chat completions routed across 300+ models from OpenAI, Anthropic, DeepSeek, Together AI, and more, with streaming, tool use, web search, automatic fallbacks, and response caching.
+#### AsyncAPI (1)
 
-- **Human URL:** [https://docs.requesty.ai/api-reference/endpoint/chat-completions-create](https://docs.requesty.ai/api-reference/endpoint/chat-completions-create)
-- **Base URL:** `https://router.requesty.ai/v1`
+Event-driven and webhook contracts.
 
-#### Tags
+- [Requesty Chat Completions Streaming (HTTP + SSE)](https://apis.io/asyncapis/requesty/requesty-asyncapi/)
 
-- Chat
-- Completions
-- Routing
-- LLM
+#### Event channels (1)
 
-#### Properties
+Individual events and webhooks the provider emits.
 
-- [Documentation](https://docs.requesty.ai)
-- [API Reference](https://docs.requesty.ai/api-reference/endpoint/chat-completions-create)
-- [OpenAPI](openapi/requesty-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [AsyncAPI](asyncapi/requesty-asyncapi.yml) — [AsyncAPI Specification](https://www.asyncapi.com/docs/reference/specification/latest)
-- [Postman Collection](collections/requesty.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/requesty.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [/chat/completions](https://apis.io/channels/requesty/chat-completions/)
 
-### Requesty Models API
+#### Agentic access (1)
 
-Lists the 300+ models routable through the Requesty gateway with their identifiers, provider, context length, and per-token pricing.
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- **Human URL:** [https://docs.requesty.ai](https://docs.requesty.ai)
-- **Base URL:** `https://router.requesty.ai/v1`
+- [Requesty Agentic Access](https://apis.io/agentic-access/requesty/requesty-agentic-access/)
 
-#### Tags
+#### Collections (6)
 
-- Models
-- Catalog
+Postman and Open Collection request collections.
 
-#### Properties
+- [Requesty Router API](https://apis.io/collections/requesty/open-requesty/)
+- [Requesty Router API Keys API](https://apis.io/collections/requesty/open-requesty-api-keys-api/)
+- [Requesty Router API Keys Chat API](https://apis.io/collections/requesty/open-requesty-chat-api/)
+- [Requesty Router API Keys Embeddings API](https://apis.io/collections/requesty/open-requesty-embeddings-api/)
+- [Requesty Router API Keys Models API](https://apis.io/collections/requesty/open-requesty-models-api/)
+- [Requesty Router API Keys Usage API](https://apis.io/collections/requesty/open-requesty-usage-api/)
 
-- [Documentation](https://docs.requesty.ai)
-- [API Reference](https://www.requesty.ai/models)
-- [OpenAPI](openapi/requesty-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/requesty.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/requesty.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Governance rules (1)
 
-### Requesty Usage & Analytics API
+Spectral rulesets for the provider's contracts.
 
-Retrieves per-key and organization-level usage statistics, request cost, and spend reporting for observability and FinOps across the gateway.
+- [Requesty — asyncapi rules](https://apis.io/rules/requesty/requesty-asyncapi-spectral-rules/)
 
-- **Human URL:** [https://docs.requesty.ai](https://docs.requesty.ai)
-- **Base URL:** `https://router.requesty.ai/v1`
+#### Security (4)
 
-#### Tags
+Authentication, trust centre, and vulnerability disclosure.
 
-- Usage
-- Analytics
-- Observability
-- FinOps
+- [Requesty Authentication](https://apis.io/security/requesty/requesty-authentication/)
+- [Requesty Domain Security](https://apis.io/security/requesty/requesty-domain-security/)
+- [Requesty Trust Center](https://apis.io/security/requesty/requesty-trust-center/)
+- [Requesty Vulnerability Disclosure](https://apis.io/security/requesty/requesty-vulnerability-disclosure/)
 
-#### Properties
+#### Plans and pricing (1)
 
-- [Documentation](https://docs.requesty.ai)
-- [OpenAPI](openapi/requesty-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/requesty.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/requesty.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Published plans, tiers and prices.
 
-### Requesty API Keys API
+- [Requesty Plans Pricing](https://apis.io/plans/requesty/requesty-plans-pricing/)
 
-Programmatically create, list, inspect, and delete API keys and manage their spending limits, labels, and expiration for governing gateway access.
+#### Rate limits (1)
 
-- **Human URL:** [https://app.requesty.ai/api-keys](https://app.requesty.ai/api-keys)
-- **Base URL:** `https://router.requesty.ai/v1`
+Published request limits.
 
-#### Tags
+- [Requesty Rate Limits](https://apis.io/rate-limits/requesty/requesty-rate-limits/)
 
-- API Keys
-- Management
-- Governance
+#### FinOps (1)
 
-#### Properties
+What the API costs to run, by operation.
 
-- [Documentation](https://docs.requesty.ai)
-- [OpenAPI](openapi/requesty-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/requesty.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/requesty.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Requesty Finops](https://apis.io/finops/requesty/requesty-finops/)
 
-## Common Properties
+## Where to find this API
 
-- [GitHub Organization](https://github.com/requestyai)
-- [LinkedIn](https://www.linkedin.com/company/requesty)
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
 - [Website](https://www.requesty.ai)
 - [Documentation](https://docs.requesty.ai)
-- [Plans](plans/requesty-plans-pricing.yml)
-- [Rate Limits](rate-limits/requesty-rate-limits.yml)
-- [Fin Ops](finops/requesty-finops.yml)
+- [Pricing](https://www.requesty.ai/pricing)
+- [Blog](https://www.requesty.ai/blog)
+- [GitHub](https://github.com/requestyai)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 38.6** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 54.9 |
+| Contract governance | 11.4 |
+| Operational transparency | 2.6 |
+| Developer ergonomics | 32.1 |
+| Access clarity | 50.0 |
+
+**Agent readiness 24.3** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | derived (partial credit) |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | near-conformant (partial credit) |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 20.9** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/requesty/](https://apis.io/providers/requesty/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Requesty: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/requesty/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
